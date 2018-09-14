@@ -47,12 +47,20 @@ public class Config {
                 .append("格式种类（TYPE_FORMAT）"+TYPE_FORMAT+"\n")
                 .append("通道数（CHANNEL_NUMBER）："+CHANNEL_NUMBER+"\n")
                 .append("采样频率（SAMPLING_FREQUENCY）："+SAMPLING_FREQUENCY+"\n")
-                .append("波形数据传输速率（TRANSMISSION_RATE）："+TRANSMISSION_RATE+"\n")
+                .append("波形数据传输速率（TRANSMISSION_RATE）："+TRANSMISSION_RATE+"（采样频率×音频通道数×每次采样得到的样本位数/8）\n")
                 .append("数据块的调整数（DATA_SIZE）："+DATA_SIZE+"\n")
                 .append("PCM位宽（PCM_BIT_WIDTH）："+PCM_BIT_WIDTH+"\n")
                 .append("附加信息（ADDITIONAL_INFORMATION）："+ADDITIONAL_INFORMATION+"\n")
                 .append("数据标志符（DATA_FLAG）："+DATA_FLAG+"\n")
-                .append("语音数据大小（AUDIO_DATA_SIZE）："+AUDIO_DATA_SIZE+"\n");
+                .append("语音数据大小（AUDIO_DATA_SIZE）："+AUDIO_DATA_SIZE+"\n")
+                .append("---------计算的出的数据---------\n")
+                .append("比特率（kbs）="+TRANSMISSION_RATE*8/1000+"（波形数据传输速率×8/1000）\n")
+                .append("音频文件时长（字节）="+AUDIO_DATA_SIZE/TRANSMISSION_RATE+"（WAV文件所占容量/波形数据传输速率）\n")
+                //.append("WAV文件所占大小（字节）="+TRANSMISSION_RATE*(AUDIO_DATA_SIZE/TRANSMISSION_RATE)+"（波形数据传输速率×音频文件时长）\n")
+                .append("总数据样本数："+SAMPLING_FREQUENCY*(AUDIO_DATA_SIZE/TRANSMISSION_RATE)+"（文件时长x采样频率）\n");
         System.out.println(sb.toString());
     }
+
+    public static int count=0;
+    public static int win=0;
 }

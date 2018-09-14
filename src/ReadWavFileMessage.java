@@ -85,7 +85,7 @@ public class ReadWavFileMessage {
             }
             //读取文件体信息
             while((len=bis.read())!=-1){
-                readFileCallback.readFile(len+"");
+                readFileCallback.readFile(len);
             }
             bis.close();
         }catch (IOException e){
@@ -120,41 +120,10 @@ public class ReadWavFileMessage {
         return bytes;
     }
 
-//    private String getData(){
-//        boolean dataFlag=false;
-//
-//        while(!dataFlag){
-//            String strD=new String(readBytes(1));
-//            if(strD.equals("d")){
-//                System.out.println("-------------"+wavFileHeaderLength);
-//                break;
-////                String strA=new String(readBytes(1));
-////                if (strA.equals("a")){
-////                    String strT=new String(readBytes(1));
-////                    if (strT.equals("t")){
-////                        String strA2=new String(readBytes(1));
-////                        if(strA2.equals("a")){
-////                            dataFlag=true;
-////                        }
-////                    }
-////                }
-//            }
-//        }
-//
-//        System.out.println(new String(readBytes(1)));
-//        if (dataFlag==false)
-//            try {
-//                throw new IOException("数据异常-----");
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        return "data";
-//    }
-
     /**
      * 文件读取回调接口
      */
     public interface readFileCallback{
-        void readFile(String str);
+        void readFile(int i);
     }
 }
